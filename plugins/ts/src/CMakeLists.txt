@@ -135,7 +135,7 @@ SET(HDRS
 # ------------------------------------------------------------------------------
 add_library(waflzts SHARED ${SRCS} ${PB_SRCS})
 add_dependencies(waflzts waflzcore)
-target_link_libraries(waflzts ${CMAKE_BINARY_DIR}/src/libwaflzcore.a protobuf pcre xml2 ssl)
+target_link_libraries(waflzts ${CMAKE_BINARY_DIR}/src/libwaflzcore.a ${LIBRARIES})
 
 target_include_directories(waflzts PUBLIC ${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/proto/ ${CMAKE_BINARY_DIR}/)
 

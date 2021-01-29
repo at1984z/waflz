@@ -38,9 +38,9 @@ git submodule update -f --init || {
 }
 mkdir -p build
 pushd build
-cmake ../ -DBUILD_SYMBOLS=ON -DBUILD_APPS=ON -DBUILD_UBUNTU=OFF -DBUILD_RATE_LIMITING=ON -DCMAKE_INSTALL_PREFIX=/usr
+cmake ../ -DBUILD_SYMBOLS=ON -DBUILD_APPS=OFF -DBUILD_UBUNTU=OFF -DBUILD_RATE_LIMITING=ON -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_CUSTOM_OPENSSL=/opt/oath/openssl/1.1.1
 make 
-make test
+CTEST_OUTPUT_ON_FAILURE=1 ctest -E blackbox
 popd
 # ------------------------------------------------------------------------------
 # Build waflz
