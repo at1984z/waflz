@@ -90,20 +90,20 @@ struct waflz_transaction_t {
 //: TODO
 //: ----------------------------------------------------------------------------
 //static const char *s_ip = "127.0.0.1";
-static int32_t get_rqst_src_addr_cb(const char **a_data, uint32_t &a_len, void *a_ctx)
+static int32_t get_rqst_src_addr_cb(const char **a_data, uint32_t *a_len, void *a_ctx)
 {
         waflz_transaction_t* t = (waflz_transaction_t*)a_ctx;
         if (t->trace) {
             std::cout << "get_rqst_src_addr_cb: " << t->client_ip << "\n";
         }
         *a_data = t->client_ip;  //s_ip;
-        a_len = strlen(t->client_ip);  //strlen(s_ip);
+        *a_len = strlen(t->client_ip);  //strlen(s_ip);
         return 0;
 }
 //: ----------------------------------------------------------------------------
 //: TODO
 //: ----------------------------------------------------------------------------
-static int32_t get_rqst_line_cb(const char **a_data, uint32_t &a_len, void *a_ctx)
+static int32_t get_rqst_line_cb(const char **a_data, uint32_t *a_len, void *a_ctx)
 {
         waflz_transaction_t* t = (waflz_transaction_t*)a_ctx;
         t->rqst_line.assign(t->method);
@@ -118,13 +118,13 @@ static int32_t get_rqst_line_cb(const char **a_data, uint32_t &a_len, void *a_ct
         }
         //static const char s_line[] = "GET /test.pl HTTP/1.1";
         *a_data = t->rqst_line.c_str();  //s_line;
-        a_len = t->rqst_line.size();  //strlen(s_line);
+        *a_len = t->rqst_line.size();  //strlen(s_line);
         return 0;
 }
 //! ----------------------------------------------------------------------------
 //! get host callback
 //! ----------------------------------------------------------------------------
-static int32_t get_rqst_host_cb(const char **a_data, uint32_t &a_len, void *a_ctx)
+static int32_t get_rqst_host_cb(const char **a_data, uint32_t *a_len, void *a_ctx)
 {
         waflz_transaction_t* t = (waflz_transaction_t*)a_ctx;
         if (t->trace) {
@@ -132,13 +132,13 @@ static int32_t get_rqst_host_cb(const char **a_data, uint32_t &a_len, void *a_ct
         }
         //static const char s_uri[] = "127.0.0.1";
         *a_data = t->host;  //s_uri;
-        a_len = strlen(t->host);  //strlen(s_uri);
+        *a_len = strlen(t->host);  //strlen(s_uri);
         return 0;
 }
 //: ----------------------------------------------------------------------------
 //: TODO
 //: ----------------------------------------------------------------------------
-static int32_t get_rqst_query_str_cb(const char **a_data, uint32_t &a_len, void *a_ctx)
+static int32_t get_rqst_query_str_cb(const char **a_data, uint32_t *a_len, void *a_ctx)
 {
         waflz_transaction_t* t = (waflz_transaction_t*)a_ctx;
         if (t->trace) {
@@ -146,41 +146,41 @@ static int32_t get_rqst_query_str_cb(const char **a_data, uint32_t &a_len, void 
         }
         //static const char s_line[] = "param1=test&para2=test2";  //TODO no question mark?
         *a_data = t->query;  //s_line;
-        a_len = strlen(t->query);  //strlen(s_line);
+        *a_len = strlen(t->query);  //strlen(s_line);
         return 0;
 }
 //: ----------------------------------------------------------------------------
 //: TODO
 //: ----------------------------------------------------------------------------
 //static const char *s_uri = "/test.pl";
-static int32_t get_rqst_uri_cb(const char **a_data, uint32_t &a_len, void *a_ctx)
+static int32_t get_rqst_uri_cb(const char **a_data, uint32_t *a_len, void *a_ctx)
 {
         waflz_transaction_t* t = (waflz_transaction_t*)a_ctx;
         if (t->trace) {
             std::cout << "get_rqst_uri_cb: " << t->uri << "\n";
         }
         *a_data = t->uri;  //s_uri;
-        a_len = strlen(t->uri);  //strlen(s_uri);
+        *a_len = strlen(t->uri);  //strlen(s_uri);
         return 0;
 }
 //: ----------------------------------------------------------------------------
 //: s_get_rqst_method_cb
 //: ----------------------------------------------------------------------------
 //static const char *s_method = "GET";
-static int32_t get_rqst_method_cb(const char **a_data, uint32_t &a_len, void *a_ctx)
+static int32_t get_rqst_method_cb(const char **a_data, uint32_t *a_len, void *a_ctx)
 {
         waflz_transaction_t* t = (waflz_transaction_t*)a_ctx;
         if (t->trace) {
             std::cout << "get_rqst_method_cb: " << t->method << "\n";
         }
         *a_data = t->method;  //s_method;
-        a_len = strlen(t->method);  //strlen(s_method);
+        *a_len = strlen(t->method);  //strlen(s_method);
         return 0;
 }
 //: ----------------------------------------------------------------------------
 //: TODO
 //: ----------------------------------------------------------------------------
-static int32_t get_rqst_protocol_cb(const char **a_data, uint32_t &a_len, void *a_ctx)
+static int32_t get_rqst_protocol_cb(const char **a_data, uint32_t *a_len, void *a_ctx)
 {
         waflz_transaction_t* t = (waflz_transaction_t*)a_ctx;
         t->rqst_protocol.assign(t->protocol);
@@ -191,13 +191,13 @@ static int32_t get_rqst_protocol_cb(const char **a_data, uint32_t &a_len, void *
         }
         //static const char s_line[] = "HTTP/1.1";
         *a_data = t->rqst_protocol.c_str();  //s_line;
-        a_len = t->rqst_protocol.size();  //strlen(s_line);
+        *a_len = t->rqst_protocol.size();  //strlen(s_line);
         return 0;
 }
 //: ----------------------------------------------------------------------------
 //: TODO
 //: ----------------------------------------------------------------------------
-static int32_t get_rqst_scheme_cb(const char **a_data, uint32_t &a_len, void *a_ctx)
+static int32_t get_rqst_scheme_cb(const char **a_data, uint32_t *a_len, void *a_ctx)
 {
         waflz_transaction_t* t = (waflz_transaction_t*)a_ctx;
         if (t->trace) {
@@ -205,25 +205,25 @@ static int32_t get_rqst_scheme_cb(const char **a_data, uint32_t &a_len, void *a_
         }
         //static const char s_line[] = "http";
         *a_data = t->scheme;  //s_line;
-        a_len = strlen(t->scheme);  //strlen(s_line);
+        *a_len = strlen(t->scheme);  //strlen(s_line);
         return 0;
 }
 //: ----------------------------------------------------------------------------
 //: TODO
 //: ----------------------------------------------------------------------------
-static int32_t get_rqst_port_cb(uint32_t &a_val, void *a_ctx)
+static int32_t get_rqst_port_cb(uint32_t *a_val, void *a_ctx)
 {
         waflz_transaction_t* t = (waflz_transaction_t*)a_ctx;
         if (t->trace) {
             std::cout << "get_rqst_port_cb: " << t->port << "\n";
         }
-        a_val = t->port;  //80;
+        *a_val = t->port;  //80;
         return 0;
 }
 //: ----------------------------------------------------------------------------
 //: TODO
 //: ----------------------------------------------------------------------------
-static int32_t get_rqst_url_cb(const char **a_data, uint32_t &a_len, void *a_ctx)
+static int32_t get_rqst_url_cb(const char **a_data, uint32_t *a_len, void *a_ctx)
 {
         waflz_transaction_t* t = (waflz_transaction_t*)a_ctx;
         if (t->trace) {
@@ -231,59 +231,59 @@ static int32_t get_rqst_url_cb(const char **a_data, uint32_t &a_len, void *a_ctx
         }
         //static const char s_line[] = "127.0.0.1/test.pl?param1=test&para2=test2";
         *a_data = t->url;  //s_line;
-        a_len = strlen(t->url);  //strlen(s_line);
+        *a_len = strlen(t->url);  //strlen(s_line);
         return 0;
 }
 //: ----------------------------------------------------------------------------
 //: s_get_rqst_path_cb
 //: ----------------------------------------------------------------------------
 //static const char *s_path = "/test.pl";
-static int32_t get_rqst_path_cb(const char **a_data, uint32_t &a_len, void *a_ctx)
+static int32_t get_rqst_path_cb(const char **a_data, uint32_t *a_len, void *a_ctx)
 {
         waflz_transaction_t* t = (waflz_transaction_t*)a_ctx;
         if (t->trace) {
             std::cout << "get_rqst_path_cb: " << t->path << "\n";
         }
         *a_data = t->path;  //s_path;
-        a_len = strlen(t->path);  //strlen(s_path);
+        *a_len = strlen(t->path);  //strlen(s_path);
         return 0;
 }
 //: ----------------------------------------------------------------------------
 //: get_rqst_header_size_cb
 //: ----------------------------------------------------------------------------
-static int32_t get_rqst_header_size_cb(uint32_t &a_val, void *a_ctx)
+static int32_t get_rqst_header_size_cb(uint32_t *a_val, void *a_ctx)
 {
         waflz_transaction_t* t = (waflz_transaction_t*)a_ctx;
         if (t->trace) {
             std::cout << "get_rqst_header_size_cb: " << t->headers.size() << "\n";
         }
-        a_val = t->headers.size();  //10;
+        *a_val = t->headers.size();  //10;
         return 0;
 }
 //: ----------------------------------------------------------------------------
 //: get_rqst_header_w_idx_cb
 //: ----------------------------------------------------------------------------
 static int32_t get_rqst_header_w_idx_cb(const char **ao_key,
-                                        uint32_t &ao_key_len,
+                                        uint32_t *ao_key_len,
                                         const char **ao_val,
-                                        uint32_t &ao_val_len,
+                                        uint32_t *ao_val_len,
                                         void *a_ctx,
                                         uint32_t a_idx)
 {
         waflz_transaction_t* t = (waflz_transaction_t*)a_ctx;
         *ao_key = NULL;
-        ao_key_len = 0;
+        *ao_key_len = 0;
         *ao_val = NULL;
-        ao_val_len = 0;
+        *ao_val_len = 0;
         if (t->headers.size() > 0 && a_idx < t->headers.size())
         {
                 if (t->trace) {
                         std::cout << "get_rqst_header_w_idx_cb: a_idx: " << a_idx << " k: [" << t->headers[a_idx].first << "] v: [" << t->headers[a_idx].second << "]\n";
                 }
                 *ao_key = t->headers[a_idx].first;
-                ao_key_len = strlen(t->headers[a_idx].first);
+                *ao_key_len = strlen(t->headers[a_idx].first);
                 *ao_val = t->headers[a_idx].second;
-                ao_val_len = strlen(t->headers[a_idx].second);
+                *ao_val_len = strlen(t->headers[a_idx].second);
         }
         return 0;
 }
@@ -327,24 +327,33 @@ waflz_profile_t* waflz_profile_new_load(const char* rule_dir,
         return nullptr;
     }
     
-    ns_waflz::rqst_ctx::s_get_rqst_src_addr_cb = get_rqst_src_addr_cb;
-    ns_waflz::rqst_ctx::s_get_rqst_line_cb = get_rqst_line_cb;
-    ns_waflz::rqst_ctx::s_get_rqst_uri_cb = get_rqst_uri_cb;
-    ns_waflz::rqst_ctx::s_get_rqst_url_cb = get_rqst_url_cb;
-    ns_waflz::rqst_ctx::s_get_rqst_header_size_cb = get_rqst_header_size_cb;
-    ns_waflz::rqst_ctx::s_get_rqst_header_w_idx_cb = get_rqst_header_w_idx_cb;
-    ns_waflz::rqst_ctx::s_get_rqst_scheme_cb = get_rqst_scheme_cb;
-    ns_waflz::rqst_ctx::s_get_rqst_port_cb = get_rqst_port_cb;
-    ns_waflz::rqst_ctx::s_get_rqst_method_cb = get_rqst_method_cb;
-    ns_waflz::rqst_ctx::s_get_rqst_path_cb = get_rqst_path_cb;
-    ns_waflz::rqst_ctx::s_get_rqst_host_cb = get_rqst_host_cb;
-    ns_waflz::rqst_ctx::s_get_rqst_protocol_cb = get_rqst_protocol_cb;
-    ns_waflz::rqst_ctx::s_get_rqst_query_str_cb = get_rqst_query_str_cb;
-    //--?? ns_waflz::rqst_ctx::s_get_rqst_uuid_cb = get_rqst_uuid_cb;
-    //--?? ns_waflz::rqst_ctx::s_get_rqst_body_str_cb = get_rqst_body_str_cb;
-
     return wp;
 }
+
+static ns_waflz::rqst_ctx_callbacks s_callbacks {
+    get_rqst_src_addr_cb,
+    get_rqst_host_cb,
+    get_rqst_port_cb,
+    get_rqst_scheme_cb,
+    get_rqst_protocol_cb,
+    get_rqst_line_cb,
+    get_rqst_method_cb,
+    get_rqst_url_cb,
+    get_rqst_uri_cb,
+    get_rqst_path_cb,
+    get_rqst_query_str_cb,
+    get_rqst_header_size_cb,
+    NULL,    // get_rqst_data_w_key_cb_t m_get_rqst_header_w_key_cb;
+    get_rqst_header_w_idx_cb,
+    NULL,    // get_rqst_body_data_cb_t m_get_rqst_body_str_cb;
+    NULL,    // get_rqst_data_cb_t m_get_rqst_local_addr_cb;
+    NULL,    // get_rqst_data_size_cb_t m_get_rqst_canonical_port_cb;
+    NULL,    // get_rqst_data_size_cb_t m_get_rqst_apparent_cache_status_cb;
+    NULL,    // get_rqst_data_size_cb_t m_get_rqst_bytes_out_cb;
+    NULL,    // get_rqst_data_size_cb_t m_get_rqst_bytes_in_cb;
+    NULL,    // get_rqst_data_cb_t m_get_rqst_uuid_cb;
+    NULL     // get_rqst_data_size_cb_t m_get_cust_id_cb;
+};
 
 int waflz_profile_process(waflz_transaction_t* tx)
 {
@@ -353,6 +362,7 @@ int waflz_profile_process(waflz_transaction_t* tx)
     ns_waflz::rqst_ctx *l_rqst_ctx = NULL;
 
     int rc = 0;  //no internal errors; action - Pass;
+    l_rqst_ctx = new ns_waflz::rqst_ctx(l_ctx, DEFAULT_BODY_SIZE_MAX, &s_callbacks);
     int32_t l_s = tx->profile->profile->process(&l_event, l_ctx, ns_waflz::PART_MK_ALL, &l_rqst_ctx);
     if (l_s == WAFLZ_STATUS_OK) {
         if (l_event) {
